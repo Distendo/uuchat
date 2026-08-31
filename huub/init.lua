@@ -5,7 +5,6 @@
 -- made by distendo/uu                                  
                                   
                                   
-
 local HttpService = game:GetService("HttpService")
 local PAYLOAD_URL = "https://raw.githubusercontent.com/Distendo/uuchat/refs/heads/main/main.ts"
 
@@ -93,6 +92,8 @@ function TSInterpreter.process(source: string)
 	end
 
 	local code = source
+	code = code:gsub("/%*.-scriptVersion%s*=%s*["\'](v[12])["\'].-%*/", "")
+	code = code:gsub("//%s*scriptVersion%s*=%s*["\'](v[12])["\']", "")
 	code = code:gsub("interface%s+%w+%s*%-?%s*{.-}", "")
 	code = code:gsub("type%s+%w+%s*=%s*[^;]+;", "")
 	code = code:gsub("as%s+[%w_<>%[%]]+", "")
