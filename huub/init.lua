@@ -101,10 +101,9 @@ function TSInterpreter.process(source: string)
 	code = code:gsub("let%s+", "local ")
 	code = code:gsub("const%s+", "local ")
 	
-	-- Fixed pattern character classes to avoid Lua pattern matching errors
 	code = code:gsub(":%s*([%w_<>]+)(%s*=)", "%2")
 	code = code:gsub(":%s*([%w_<>]+)(%s*,)", "%2")
-	code = code:gsub(":%s*([%w_<>]+)(%s*%)", "%2")
+	code = code:gsub(":%s*([%w_<>]+)(%s*[%)])", "%2")
 
 	return code, versionMatch, nil
 end
